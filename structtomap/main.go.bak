@@ -1,0 +1,30 @@
+package main
+
+import (
+	"fmt"
+
+	"github.com/fatih/structs"
+)
+
+func main() {
+	type Server struct {
+		Name    string `json:"name,omitempty"`
+		ID      int
+		Enabled bool
+		users   []string // not exported
+		// http.Server          // embedded
+	}
+
+	server := &Server{
+		Name:    "gopher",
+		ID:      123456,
+		Enabled: true,
+	}
+
+	s := structs.New(server)
+
+	m := s.Map()
+
+	fmt.Printf("%#v", m)
+
+}
